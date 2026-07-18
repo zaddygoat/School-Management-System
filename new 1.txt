@@ -1,0 +1,15 @@
+
+--SPND SWADHAR INSTITUTE LOGIN--
+link - https://spnd.pssm.in/swadhar/institute/dashboard.php
+username - swadharspnd
+password - swadharadmin@6541#
+
+--PSSM--
+link: https://43-225-53-254.cprapid.com:2083/
+username: pssmiet1
+password: 2Or(fg9z12Mb
+
+--MNWC TCLV ADMIN LOGIN
+link - https://mnwcerp.pssm.in/institute/index.php
+username - mnwc#tclv!
+password - 5TwQa1#H
