@@ -1,0 +1,13 @@
+$subject_id = intval($_GET['id'] ?? 0);
+if (isset($_POST['submit'])) {
+    $post_subject_id = intval($_POST['id']);
+    $name = trim($_POST['name']);
+
+    if ($post_subject_id && $name !== '') {
+        $stmt1 = $conn->prepare("SELECT id FROM subjects (id, name) VALUES (?, ?)");
+        $stmt1->bind_param("is", $post_subject_id, $name);
+        $stmt1->execute();
+    }
+
+    header("location: subjects.php?id=" . $post_subject_id);
+    exit();1

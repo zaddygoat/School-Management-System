@@ -33,29 +33,13 @@
             <p>Student Dashboard</p>
         </a>
     </li>
-    <!-- Manage Classes -->
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon bi bi-building"></i>
-            <p>
-                Manage Classes
-                <i class="nav-arrow bi bi-chevron-right"></i>
-            </p>
-        </a>
-
-        <ul class="nav nav-treeview">
-            <li class="nav-item"><a href="<?=$base_url?>student/classes.php" class="nav-link"><p>Classes</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>student/courses.php" class="nav-link"><p>Courses</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>student/sections.php" class="nav-link"><p>Sections</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>student/subjects.php" class="nav-link"><p>Subjects</p></a></li>        </ul>
-    </li>
 
     <!-- Manage Class Routines -->
     <li class="nav-item">
         <a href="#" class="nav-link">
             <i class="nav-icon bi bi-calendar3"></i>
             <p>
-                Manage Timetable
+                View Timetable
                 <i class="nav-arrow bi bi-chevron-right"></i>
             </p>
         </a>
@@ -71,7 +55,7 @@
         <a href="#" class="nav-link">
             <i class="nav-icon bi bi-file-earmark-text"></i>
             <p>
-                Manage Examinations
+                VIew Examinations
                 <i class="nav-arrow bi bi-chevron-right"></i>
             </p>
         </a>
@@ -83,20 +67,17 @@
         </ul>
     </li>
 
-    <!-- Manage Attendance -->
     <li class="nav-item">
         <a href="#" class="nav-link">
             <i class="nav-icon bi bi-calendar-check"></i>
             <p>
-                Manage Attendance
+                View Attendance
                 <i class="nav-arrow bi bi-chevron-right"></i>
             </p>
         </a>
 
         <ul class="nav nav-treeview">
-            <li class="nav-item"><a href="<?=$base_url?>student/attendance.php" class="nav-link"><p>Student Attendance</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>student/teacher_attendance.php" class="nav-link"><p>Teacher Attendance</p></a></li>
-        </ul>
+            <li class="nav-item"><a href="<?=$base_url?>student/attendance.php" class="nav-link"><p>Attendance</p></a></li>        </ul>
     </li>
 	<li class="nav-item">
         <a href="#" class="nav-link">
@@ -108,7 +89,6 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item"><a href="<?=$base_url?>student/fee_details.php" class="nav-link"><p>Fee Details</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>student/teacher_attendance.php" class="nav-link"><p>Teacher Attendance</p></a></li>
         </ul>
     </li>
 	<li class="nav-item">
@@ -121,25 +101,9 @@
         </a>
 
         <ul class="nav nav-treeview">
-            <li class="nav-item"><a href="<?=$base_url?>student/attendance.php" class="nav-link"><p>Student Attendance</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>student/teacher_attendance.php" class="nav-link"><p>Teacher Attendance</p></a></li>
-        </ul>
+            <li class="nav-item"><a href="<?=$base_url?>student/study_materials.php" class="nav-link"><p>Study Materials</p></a></li>
+         </ul>
     </li>
-	<li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon bi bi-calendar-check"></i>
-            <p>
-                Contacting Teachers
-                <i class="nav-arrow bi bi-chevron-right"></i>
-            </p>
-        </a>
-
-        <ul class="nav nav-treeview">
-            <li class="nav-item"><a href="<?=$base_url?>student/attendance.php" class="nav-link"><p>Student Attendance</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>student/teacher_attendance.php" class="nav-link"><p>Teacher Attendance</p></a></li>
-        </ul>
-    </li>
-</ul>
             </nav>
         </div>
         <!-- /.sidebar-wrapper -->

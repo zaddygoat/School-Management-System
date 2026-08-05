@@ -1,16 +1,13 @@
-<?php 
-
+<?php
 	$base_url = "http://localhost:8080/project/";
-	if(isset ($_SESSION['login'])) {
-    if(isset($_SESSION['login'])) {
+	if(isset($_SESSION['login'])) {
 		if(isset($_SESSION['user_type']) && $_SESSION['user_type'] != 'admin'){
-		$user_type = $_SESSION['user_type'];
-		header("location:" .$base_url. $_SESSION['user_type'] . "/dashboard.php");
+			header("location:" .$base_url. $_SESSION['user_type'] . "/dashboard.php");
+			exit();
 		}
-	}
-	}else{
-	header("location: " .$base_url. "login.php");
-
+	} else {
+		header("location: " .$base_url. "login.php");
+		exit();
 	}
 	?>
 <!DOCTYPE html>
@@ -62,12 +59,11 @@
     />
     <meta
       name="keywords"
-      content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard, accessible admin panel, WCAG compliant"
+      content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, accessible admin panel, WCAG compliant"
     />
     <!--end::Primary Meta Tags-->
 
     <!--begin::Accessibility Features-->
-    <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
     <link rel="preload" href="./css/adminlte.css" as="style" />
     <!--end::Accessibility Features-->
@@ -100,9 +96,23 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
     <!--begin::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="../css/adminlte.css" />
     <link rel="stylesheet" href="../dist/css/adminlte.min.css" />
     <!--end::Required Plugin(AdminLTE)-->
-	
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tabulator-tables@6.4.0/dist/css/tabulator_bootstrap5.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!--begin::Required Plugin(DataTables)-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+    />
+    <!--end::Required Plugin(DataTables)-->
+
     <!-- apexcharts -->
     <link
       rel="stylesheet"
@@ -130,15 +140,7 @@
             </li>
 
             <li class="nav-item d-none d-md-block">
-              <a href="./index.html" class="nav-link">
-                <i class="bi bi-grid-1x2 me-1" aria-hidden="true"></i>
-                Live preview
-              </a>
             </li>
-            <li class="nav-item d-none d-md-block">
-              <a href="./docs/introduction.html" class="nav-link">
-                <i class="bi bi-book me-1" aria-hidden="true"></i>
-                Documentation
               </a>
             </li>
           </ul>
@@ -341,51 +343,10 @@
             </li>
             <!--end::Color Mode Toggle-->
 
-            <!--begin::User Menu Dropdown-->
-            <li class="nav-item dropdown user-menu">
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img
-                  src="../dist/assets/img/user2-160x160.jpg"
-                  class="user-image rounded-circle shadow"
-                  alt="User Image"
-                />
-                <span class="d-none d-md-inline">Zaid Ahmed</span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                <!--begin::User Image-->
-                <li class="user-header text-bg-primary">
-                  <img
-                    src="../dist/assets/img/user2-160x160.jpg"
-                    class="rounded-circle shadow"
-                    alt="User Image"
-                  />
-                  <p>
-                    Zaid Ahmed - Web Developer
-                    <small>Member since Nov. 2023</small>
-                  </p>
-                </li>
-                <!--end::User Image-->
-                <!--begin::Menu Body-->
-                <li class="user-body">
-                  <!--begin::Row-->
-                  <div class="row">
-                    <div class="col-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  <!--end::Row-->
-                </li>
-                <!--end::Menu Body-->
+  
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
-                  <a href="#" class="btn btn-outline-secondary">Profile</a>
-                  <a href="../logout.php" class="btn btn-outline-danger float-end" name="signout">Sign out</a>
+                <a href="../logout.php" class="btn btn-outline-danger float-end" name="signout">Sign out</a>
                 </li>
                 <!--end::Menu Footer-->
               </ul>

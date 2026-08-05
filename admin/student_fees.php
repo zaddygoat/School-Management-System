@@ -89,7 +89,7 @@ $currentMonth = date("F");
                                     <tr>
                                         <td><?= $sno++ ?></td>
                                         <td><?= $month ?></td>
-                                        <td></td>
+                                        <td>Paid In Cash</td>
                                         <td>
                                             <a href="process_fee_payment.php?student_id=<?= $std_id ?>&month=<?= urlencode($month) ?>" 
                                                class="btn btn-sm btn-success">

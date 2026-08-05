@@ -58,14 +58,12 @@
 		<div class = "row">
 			<div class = "col-lg-6 my-auto">
 			<h1 class = "display-1">School Management System</h1> <br>
-			<h3>Fill The Admission Form ->
 			</h3> <br>
-			<a href = "" class = "btn btn-lg btn-primary" style="background-color:#B22222; color:white">Click This Action</a>
 			</div>
 			<div class = "col-lg-6">
 				<div class = "col-lg-8 mx-auto card">
 					<div class = "card-body">
-					<h3 class = "display-6">Admission Form</h3>
+					<h3 class = "display-6"> Dummy Admission Form</h3>
 					<form action = "" method = "post" class ="">
 					  <div class = "form-floating mb-3">
 						<input type = "text" id = "form1" class = "form-control" placeholder="Your Name">

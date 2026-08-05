@@ -62,6 +62,11 @@
                     <p>Students</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="<?=$base_url?>admin/parents.php" class="nav-link">
+                    <p>Parents</p>
+                </a>
+            </li>
         </ul>
     </li>
 
@@ -99,23 +104,6 @@
         </ul>
     </li>
 
-    <!-- Manage Examinations -->
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon bi bi-file-earmark-text"></i>
-            <p>
-                Manage Examinations
-                <i class="nav-arrow bi bi-chevron-right"></i>
-            </p>
-        </a>
-
-        <ul class="nav nav-treeview">
-            <li class="nav-item"><a href="<?=$base_url?>admin/exam.php" class="nav-link"><p>Exams</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>admin/grades.php" class="nav-link"><p>Grades</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>admin/marks.php" class="nav-link"><p>Marks</p></a></li>
-        </ul>
-    </li>
-
     <!-- Manage Attendance -->
     <li class="nav-item">
         <a href="#" class="nav-link">
@@ -128,11 +116,8 @@
 
         <ul class="nav nav-treeview">
             <li class="nav-item"><a href="<?=$base_url?>admin/attendance.php" class="nav-link"><p>Student Attendance</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>admin/teacher_attendance.php" class="nav-link"><p>Teacher Attendance</p></a></li>
         </ul>
     </li>
-
-    <!-- Manage Accountings -->
     <li class="nav-item">
         <a href="#" class="nav-link">
             <i class="nav-icon bi bi-cash-stack"></i>
@@ -146,58 +131,6 @@
             <li class="nav-item"><a href="<?=$base_url?>admin/student_fees.php" class="nav-link"><p>Student Fees</p></a></li>
         </ul>
     </li>
-
-    <!-- Manage Events -->
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon bi bi-calendar-event"></i>
-            <p>
-                Manage Events
-                <i class="nav-arrow bi bi-chevron-right"></i>
-            </p>
-        </a>
-
-        <ul class="nav nav-treeview">
-            <li class="nav-item"><a href="<?=$base_url?>admin/events.php" class="nav-link"><p>All Events</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>admin/add_event.php" class="nav-link"><p>Add Event</p></a></li>
-        </ul>
-    </li>
-
-    <!-- Manage Others -->
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon bi bi-grid"></i>
-            <p>
-                Manage Others
-                <i class="nav-arrow bi bi-chevron-right"></i>
-            </p>
-        </a>
-
-        <ul class="nav nav-treeview">
-            <li class="nav-item"><a href="<?=$base_url?>admin/library.php" class="nav-link"><p>Library</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>admin/transport.php" class="nav-link"><p>Transport</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>admin/hostel.php" class="nav-link"><p>Dormitory</p></a></li>
-            <li class="nav-item"><a href="<?=$base_url?>admin/messages.php" class="nav-link"><p>Messages</p></a></li>
-        </ul>
-    </li>
-
-    <!-- Manage System -->
-    <li class="nav-item">
-        <a href="#" class="nav-link">
-            <i class="nav-icon bi bi-gear-fill"></i>
-            <p>
-                Manage System
-                <i class="nav-arrow bi bi-chevron-right"></i>
-            </p>
-        </a>
-
-        <ul class="nav nav-treeview">
-            <li class="nav-item">"<a href="<?=$base_url?>admin/settings.php" class="nav-link"><p>General Settings</p></a></li>
-            <li class="nav-item">"<a href="<?=$base_url?>admin/sms_settings.php" class="nav-link"><p>SMS Settings</p></a></li>
-            <li class="nav-item">"<a href="<?=$base_url?>admin/language.php" class="nav-link"><p>Language</p></a></li>
-        </ul>
-    </li>
-
 </ul>
             </nav>
         </div>

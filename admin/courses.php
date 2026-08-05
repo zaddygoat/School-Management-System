@@ -110,7 +110,7 @@ include('sidebar.php');
                             </tr>
                         </thead>
                         <tbody>
-						<?php
+						    <?php
                             $count = 1;
 							$courses_query = mysqli_query($conn ,'SELECT * FROM courses');
 							while($course = mysqli_fetch_object($courses_query)){ ?> 

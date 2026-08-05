@@ -25,7 +25,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'add-new';
         $stream = $_POST['stream'];
         $date_of_join = $_POST['date_of_join'];
 
-		$password = md5(123456789);
+		$password = md5($dob);
 		$type = $_POST['type'];
         $payment_method = isset($_POST['payment_method']) ? $_POST['payment_method'] : '';
 		
@@ -52,10 +52,29 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'add-new';
         mysqli_stmt_bind_param($stmt2, "isssssssssssddsssss", $student_id, $dob, $mobile, $address, $father_name, $father_mobile, $mother_name, $mother_mobile, $qualification, $college_name, $school_college, $status, $total_marks, $obtain_marks, $percentage, $admission_in, $stream, $date_of_join, $payment_method);
 		mysqli_stmt_execute($stmt2);
         mysqli_stmt_close($stmt2);
+        
+        //Parent
+		$checkParentStmt = mysqli_prepare($conn, "SELECT id FROM school_management_system WHERE email = ? AND type = 'parent'");
+		mysqli_stmt_bind_param($checkParentStmt, "s", $father_mobile);
+		mysqli_stmt_execute($checkParentStmt);
+		mysqli_stmt_store_result($checkParentStmt);
+ 
+		if (mysqli_stmt_num_rows($checkParentStmt) == 0) {
+			$parent_password = $father_mobile; // plain text, not hashed
+			$parent_type = 'parent';
+			$parent_name = $father_name . " & " . $mother_name;
+ 
+			$stmtP = mysqli_prepare($conn, "INSERT INTO school_management_system(`name`, `email`, `password`, `type`) VALUES(?, ?, ?, ?)");
+			mysqli_stmt_bind_param($stmtP, "ssss", $parent_name, $father_mobile, $parent_password, $parent_type);
+			mysqli_stmt_execute($stmtP);
+			mysqli_stmt_close($stmtP);
+		}
+		mysqli_stmt_close($checkParentStmt);
         $_SESSION['success'] = "Student added successfully!";
 		header("Location: add_students.php?action=fee-payment&std_id=" . $student_id);
 		exit();
 		}
+        
         
 
         //Fees Submission Part
@@ -208,6 +227,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'add-new';
                                     <option value="Science">Science</option>
                                     <option value="Commerce">Commerce</option>
                                     <option value="Arts">Arts</option>
+                                    <option value="Degree">Degree</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -215,8 +235,8 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'add-new';
                                 <input type="date" name="date_of_join" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="online-payment-method" class="form-label"><input type="radio" name="payment_method" value="online" id="online-payment-method"> Online Payment</label>
-                                <label for="offline-payment-method" class="form-label"><input type="radio" name="payment_method" value="offline" id="offline-payment-method"> Offline Payment</label>
+                                <h5 class="mb-3 text-primary">Payment Method</h5>
+                                <label for="cash" class="form-label"><input type="radio" name="payment_method" value="cash" id="cash"> Cash</label>
                             </div>
                         </div>
                         <?php if (isset($_SESSION['error'])): ?>
@@ -256,7 +276,4 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'add-new';
         </div>
     </div>
 </main>
-<script>
-
-    </script>
 <?php include('footer.php'); ?>

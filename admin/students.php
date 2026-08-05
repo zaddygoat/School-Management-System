@@ -3,6 +3,7 @@ include('../includes/config.php');
 if (isset($_GET['delete']) && isset($_GET['id'])) {
 	$id = $_GET['id'];
     $type = "student";
+    
     $stmt = $conn->prepare("DELETE FROM school_management_system WHERE id = ? AND type = ?");
     $stmt->bind_param("is", $id, $type);
     $stmt->execute();
@@ -43,31 +44,56 @@ include('sidebar.php');
                             <?php echo htmlspecialchars($_SESSION['success']); ?>
                         </div>
                     <?php unset($_SESSION['success']); endif; ?>
-                    <table class="table table-bordered table-striped">
+                    <form method="GET" class="row mb-3">
+                    <div class="col-md-4">
+                        <input
+                            type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Search by name or email"
+                            value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">
+                            Search
+                        </button>
+
+                        <a href="students.php" class="btn btn-secondary">
+                            Reset
+                        </a>
+                    </div>
+                </form>
+                    <table class="table table-bordered table-striped" id="users-table">
                         <thead>
                             <tr>
                                 <th style="width: 60px;">#</th>
                                 <th>Email</th>
-                                <th>Password</th>
                                 <th>Name</th>
                                 <th>Action</th>
-                                <th>View</th>
+                                <th>View Fee Details</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $type = "student";
-                            $stmt = mysqli_prepare($conn, "SELECT id, email, password, name FROM school_management_system WHERE type = ?");
-                            mysqli_stmt_bind_param($stmt, "s", $type);
-                            mysqli_stmt_execute($stmt);
-                            mysqli_stmt_bind_result($stmt, $id, $email, $password,$name);
+                            $search = trim($_GET['search'] ?? '');
+                            if ($search != "") {
+                            $searchLike = "%" . $search . "%";
 
+                            $stmt = mysqli_prepare($conn, "SELECT id, email, name FROM school_management_system WHERE type = ? AND (name LIKE ? OR email LIKE ?)");
+                            mysqli_stmt_bind_param($stmt, "sss", $type, $search, $searchLike);
+                            } else {
+                            $stmt = mysqli_prepare($conn, "SELECT id, email, name FROM school_management_system WHERE type = ?");
+                            mysqli_stmt_bind_param($stmt, "s", $type);
+                            }
+                            mysqli_stmt_execute($stmt);
+                            mysqli_stmt_bind_result($stmt, $id, $email, $name);
                             $sno = 1;
                             while (mysqli_stmt_fetch($stmt)) { ?>
                                 <tr>
-                                <td> <?=$sno?> </td>
+                                <td> <?=$sno++?> </td>
                                 <td><?= htmlspecialchars($email)?></td>
-								<td><?= htmlspecialchars($password)?></td>
                                 <td><?= htmlspecialchars($name)?></td>
 								<td>
                                   <a href="students.php?delete=1&id=<?=$id?>"
@@ -80,12 +106,11 @@ include('sidebar.php');
                                   <td>
                                   <a href="student_fees.php?id=<?= $id; ?>"
                                   class="btn btn-sm btn-info">
-                                    View
+                                    View Fee
                                  </a>
                                 </td>
                                 </tr>
-                                <?=$sno++;?>
-                            <?php }
+                                <?php }
                             mysqli_stmt_close($stmt);
                             ?>
                         </tbody>

@@ -75,7 +75,7 @@ $currentMonth = date("F");
                                     <tr>
                                         <td><?= $sno++ ?></td>
                                         <td><?= $month ?></td>
-                                        <td></td>
+                                        <td>Paid</td>
                                         <td>
                                             <button
                                             type="button"

@@ -1,5 +1,16 @@
 <?php
+session_start();
 include('../includes/config.php'); 
+if (isset($_GET['delete']) && isset($_GET['id'])) {
+	$id = $_GET['id'];
+    $type = "counsellor";
+    $stmt = $conn->prepare("DELETE FROM school_management_system WHERE id = ? AND type = ?");
+    $stmt->bind_param("is", $id, $type);
+    $stmt->execute();
+	$_SESSION['success'] = "Counsellor deleted successfully!";
+    header("location: counsellor.php");
+    exit();
+}
 include('header.php');
 include('sidebar.php');
 ?>
@@ -9,8 +20,8 @@ include('sidebar.php');
             <div class="row">
                 <div class="col-sm-6">
 				<div class="d-flex">
-                    <h3 class="mb-0">Manage Accounts </h3> 
-					<a href="add_teacher.php" class="btn btn-primary btn-sm"> Add New</a>
+                    <h3 class="d-inline-block mb-0">Manage Accounts </h3> 
+					<a href="add_counsellor.php" class="btn btn-primary btn ms-2"> Add New</a>
 					</div>
                 </div>
                 <div class="col-sm-6">
@@ -19,7 +30,7 @@ include('sidebar.php');
                             <a href="dashboard.php">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Counsellor
+                            Counsellors
                         </li>
                     </ol>
                 </div>
@@ -28,36 +39,51 @@ include('sidebar.php');
     </div>
     <div class="app-content">
         <div class="container-fluid">
-            <!-- Teacher Page Content -->
             <div class="card">
                 <div class="card-body">
+                    <?php if (isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success">
+                            <?php echo htmlspecialchars($_SESSION['success']); ?>
+                        </div>
+                    <?php unset($_SESSION['success']); endif; ?>
+
+                    <table class="table table-bordered table-striped">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th style="width: 60px;">#</th>
+                                <th style="width: 60px;">S.No.</th>
                                 <th>Email</th>
                                 <th>Password</th>
                                 <th>Name</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $type = "counsellor";
-                            $stmt = mysqli_prepare($conn, "SELECT email, password, name FROM school_management_system WHERE type = ?");
+                            $stmt = mysqli_prepare($conn, "SELECT id, email, password, name FROM school_management_system WHERE type = ?");
                             mysqli_stmt_bind_param($stmt, "s", $type);
                             mysqli_stmt_execute($stmt);
-                            mysqli_stmt_bind_result($stmt, $email, $password, $name);
+                            mysqli_stmt_bind_result($stmt, $id, $email, $password, $name);
 
                             $sno = 1;
-                            while (mysqli_stmt_fetch($stmt)) {
-                                echo "<tr>";
-                                echo "<td>" . $sno . "</td>";
-                                echo "<td>" . htmlspecialchars($email) . "</td>";
-                                echo "<td>" . htmlspecialchars($password) . "</td>";
-                                echo "<td>" . htmlspecialchars($name) . "</td>";
-                                echo "</tr>";
-                                $sno++;
-                            }
+                            while (mysqli_stmt_fetch($stmt)){ ?> 
+                                <tr>
+                                <td><?=$sno?></td>
+                                <td><?= htmlspecialchars($email)?></td>
+								<td><?= htmlspecialchars($password)?></td>
+                                <td><?= htmlspecialchars($name)?></td>
+								<td>
+                                  <a href="counsellor.php?delete=1&id=<?=$id?>"
+								   name="delete"
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Delete this counsellor?');">
+                                   Delete
+                                  </a>
+                                  </td>
+                                </tr>
+                                <?$sno++;?>
+                            <?php }
                             mysqli_stmt_close($stmt);
                             ?>
                         </tbody>

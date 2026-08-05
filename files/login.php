@@ -9,7 +9,7 @@ include('../includes/config.php');
 		$md5 = md5($password);
 		
 		$stmt = $conn->prepare("SELECT * FROM school_management_system WHERE email = ? and password = ?");
-		$stmt->bind_param("ss", $email, $password);
+		$stmt->bind_param("ss", $email, $md5);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		echo "Rows found: " . $result->num_rows . "<br>";

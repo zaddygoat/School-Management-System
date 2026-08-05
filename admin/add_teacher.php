@@ -9,23 +9,23 @@ include('../includes/config.php');
 		$password = md5(123456789);
 		$type = $_POST['type'];
 		
-		$checkStmt = mysqli_prepare($conn, "SELECT id FROM school_management_system WHERE email = ?");
-		mysqli_stmt_bind_param($checkStmt, "s", $email);
-		mysqli_stmt_execute($checkStmt);
-		mysqli_stmt_store_result($checkStmt);
+		$stmt = mysqli_prepare($conn, "SELECT id FROM school_management_system WHERE email = ?");
+		mysqli_stmt_bind_param($stmt, "s", $email);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_store_result($stmt);
 
-		if (mysqli_stmt_num_rows($checkStmt) > 0) {
+		if (mysqli_stmt_num_rows($stmt) > 0) {
 			$_SESSION['error'] = "This email is already registered.";
-			mysqli_stmt_close($checkStmt);
+			mysqli_stmt_close($stmt);
 			header("Location: add_teacher.php");
 			exit();
 		}
-		mysqli_stmt_close($checkStmt);
-		
-		$stmt = mysqli_prepare($conn, "INSERT INTO school_management_system(`name`, `email`, `password`, `type`) VALUES(?, ?, ?, ?) ");
-		mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $type);
-		mysqli_stmt_execute($stmt);
 		mysqli_stmt_close($stmt);
+		
+		$stmt1 = mysqli_prepare($conn, "INSERT INTO school_management_system(`name`, `email`, `password`, `type`) VALUES(?, ?, ?, ?) ");
+		mysqli_stmt_bind_param($stmt1, "ssss", $name, $email, $password, $type);
+		mysqli_stmt_execute($stmt1);
+		mysqli_stmt_close($stmt1);
 		
 		$_SESSION['success'] = "Teacher added successfully!";
 		header("Location: teachers.php");
